@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+{% load i18n %}
+
+{% block title %}{% trans 'Sign In' %}{% endblock %}
+
+{% block stylesheets %}
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'css/login.min.css' %}">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<!-- Page -->
+<div class="page vertical-align text-xs-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle">
+      <div class="panel">
+        <div class="panel-body">
+          <a class="brand" href="{% url 'mzyann_home_page' %}">
+            <div class="brand">
+                <img class="brand-img" src="{% static 'images/logo/mzyann-logo-512x512.png' %}" alt="...">
+                <h2 class="brand-text font-size-20">MZYANN</h2>
+            </div>
+          </a>
+          <div class="social-login-button">
+            <p>{% trans "We don't post anything in your profile" %}</p>
+            <a class="btn btn-block btn-labeled social-facebook white waves-effect" href="{% provider_login_url "facebook" process="login" method="js_sdk" %}">
+                <span class="btn-label">
+                    <i class="icon bd-facebook" aria-hidden="true"></i>
+                </span>Sign in with Facebook 
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- End Page -->
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+  {% providers_media_js %}
+  <!-- Page -->
+  <script>
+    $(document).ready(function() {
+        $('body').addClass("page-login-v3 layout-full site-menubar-fold")
+    })
+  </script>
+{% endblock %}

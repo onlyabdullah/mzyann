@@ -1,0 +1,11 @@
+Django
+django-allauth
+django-widget-tweaks
+django-star-ratings
+django-debug-toolbar
+Pillow
+Gunicorn
+python-decouple
+cloudinary
+django-formtools
+mysqlclient

@@ -1,0 +1,170 @@
+{% extends 'account_settings_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block extra_stylesheets %}
+    <link rel="stylesheet" href="{% static 'vendor/clockpicker/clockpicker.css' %}">
+{% endblock %}
+
+{% block title %}{% trans 'Account Settings - Profile' %}{% endblock %}
+
+{% block extra_content %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title font-size-24">{% trans 'Account Settings' %}</h3>
+    </div>
+    <div class="panel-body">
+        <form method="post" class="fv-form fv-form-bootstrap" role="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if account_form.non_field_errors %}
+                <div class="summary-errors alert alert-danger alert-dismissible text-xs-left" style="display: block;">
+                    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <p class="">Errors list below: </p>
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                        <li class="">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {% if form.non_field_errors %}
+                <div class="summary-errors alert alert-danger alert-dismissible text-xs-left" style="display: block;">
+                    <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <p class="">Errors list below: </p>
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                        <li class="">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="form-group form-material floating text-xs-center" data-plugin="formMaterial">
+                <input type="text" class="form-control hidden-xs-up" readonly="">
+                {% render_field form.profile_picture class="form-control img-input hidden-xs-up" %}
+                <a class="select" href="javascript:void(0)">
+                    <div class="panel panel-transparent">
+                        <div class="preview-panel panel-body profile-pic text-xs-center text-middle w-100 h-100 offset-xl-4 offset-lg-4 offset-md-4 offset-sm-4 offset-xs-4">
+                            <i class="icon md-edit white font-size-40" aria-hidden="true" style="display: none;"></i>
+                        </div>
+                    </div>
+                </a>
+                <small class="text-help">{{ form.profile_picture.help_text }}</small>
+                {% for error in form.profile_picture.errors %}
+                <small class="text-help red-500">{{ error }}</small>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group form-material floating" data-plugin="formMaterial">
+                        {% render_field account_form.first_name class="form-control" placeholder="" %}
+                        <label class="floating-label" for="{{ account_form.first_name.id }}">{% trans 'First Name' %}</label>
+                        <small class="text-help">
+                            {{ account_form.first_name.help_text }}
+                        </small>
+                        {% for error in account_form.first_name.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group form-material floating" data-plugin="formMaterial">          
+                        {% render_field account_form.last_name class="form-control" placeholder="" %}
+                        <label class="floating-label" for="{{ account_form.last_name.id }}">{% trans 'Last Name' %}</label>
+                        <small class="text-help">
+                            {{ account_form.last_name.help_text }}
+                        </small>
+                        {% for error in account_form.last_name.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+                {% render_field form.area class="form-control" %}
+                <label class="floating-label" for="{{ form.area.id }}">{% trans 'Area' %}</label>
+                <small class="text-help">
+                    {{ form.area.help_text }}
+                </small>
+                {% for error in form.area.errors %}
+                <small class="text-help red-500">
+                    {{ error }}
+                </small>
+                {% endfor %}
+            </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+                {% render_field form.phone_number class="form-control" %}
+                <label class="floating-label" for="{{ form.phone_number.id }}">{% trans 'Phone Number' %}</label>
+                <small class="text-help">
+                    {{ form.phone_number.help_text }}
+                </small>
+                {% for error in form.phone_number.errors %}
+                <small class="text-help red-500">
+                    {{ error }}
+                </small>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group form-material" data-plugin="formMaterial">
+                        <label class="form-control-label" for="{{ form.call_time_from.id }}">{% trans 'Call Time From' %}</label>
+                        {% render_field form.call_time_from class="timepicker form-control" data-plugin="clockpicker" data-autoclose="true" placeholder="10:00" %}
+                        <small class="text-help">
+                            {{ form.call_time_from.help_text }}
+                        </small>
+                        {% for error in form.call_time_from.errors %}
+                        <small class="text-help red-500">
+                            {{ error }}
+                        </small>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-md-6 col-xs-12">
+                    <div class="form-group form-material" data-plugin="formMaterial">
+                        <label class="form-control-label" for="{{ form.call_time_to.id }}">{% trans 'Call Time To' %}</label>
+                        {% render_field form.call_time_to class="timepicker form-control" data-plugin="clockpicker" data-autoclose="true" placeholder="20:00" %}
+                        <small class="text-help">
+                            {{ form.call_time_to.help_text }}
+                        </small>
+                        {% for error in form.call_time_to.errors %}
+                        <small class="text-help red-500">
+                            {{ error }}
+                        </small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="form-group form-material floating" data-plugin="formMaterial">
+                {% render_field form.about class="form-control" %}
+                <label class="floating-label" for="{{ form.about.id }}">{% trans 'Briefly, write about yourself' %}</label>
+                <small class="text-help">
+                    {{ form.about.help_text }}
+                </small>
+                {% for error in form.about.errors %}
+                <small class="text-help red-500">
+                    {{ error }}
+                </small>
+                {% endfor %}
+            </div>
+            <div class="offset-xl-8 offset-lg-8 offset-md-8">
+                <button class="btn btn-primary btn-block pull-xs-right waves-effect">{% trans 'Save' %}</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'vendor/clockpicker/bootstrap-clockpicker.min.js' %}"></script>     
+    <script src="{% static 'vendor/uploadPreview/uploadPreview.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/clockpicker.min.js' %}"></script>
+    <script src="{% static 'js/uploads.min.js' %}"></script>
+{% endblock %}

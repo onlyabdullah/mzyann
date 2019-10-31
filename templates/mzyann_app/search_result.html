@@ -1,0 +1,251 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load i18n %}
+{% load cloudinary %}
+
+{% block title %}{% trans 'Search Result' %} - Mzyann{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'vendor/ionrangeslider/ionrangeslider.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/raty/jquery.raty.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page">
+    <div class="page-header">
+        <h1 class="page-title">
+            {% trans 'Search Result' %}
+        </h1>
+    </div>
+    <div class="page-content container container-fluid">
+        <div class="modal fade" id="goToLogin" aria-labelledby="goToLogin" role="dialog" tabindex="-1" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog modal-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title text-xs-center">{% trans 'Please sign in or sign up to see more about this professional' %}</h4>
+                    </div>
+                    <div class="modal-body text-xs-center">
+                        <a class="btn btn-primary waves-effect white" href="{% url "account_login" %}">{% trans 'Sign In' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div id="search_form_panel" class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Search</h3>
+                        <div class="panel-actions panel-actions-keep">
+                            <a class="panel-action icon md-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="search_form" action="{% url 'mzyann_search' %}">
+                            <div class="row">
+                                <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group col-xl-3 col-lg-3 col-md-12 col-xs-12">
+                                        <div class="inline form-label font-size-16">
+                                            <i class="form-control-icon icon md-help" aria-hidden="true"></i>
+                                            <label class="form-control-label" for="{{ form.job.id }}">{% trans 'What you need?' %}</label>
+                                        </div>
+                                        {% url "mzyann_home_page" as mzyann_home_page %}
+                                        {% render_field form.job class="form-control search-form-input" data-url=mzyann_home_page %}
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-3 col-md-12 col-xs-12">
+                                        <div class="inline form-label font-size-16">
+                                            <i class="form-control-icon icon md-assignment" aria-hidden="true"></i>
+                                            <label class="form-control-label" for="{{ form.item.id }}">{% trans 'For?' %}</label>
+                                        </div>
+                                        {% render_field form.item class="form-control search-form-input" %}
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-3 col-md-12 col-xs-12">
+                                        <div class="inline form-label font-size-16">
+                                            <i class="icon md-pin" aria-hidden="true"></i>
+                                            <label class="form-control-label" for="{{ form.area.id }}">{% trans 'Area' %}</label>
+                                        </div>
+                                        {% render_field form.area class="form-control search-form-input" %}
+                                    </div>
+                                    <div class="form-group col-xl-3 col-lg-3 col-md-12 col-xs-12">
+                                        <div class="inline form-label font-size-16">
+                                            <i class="icon md-face" aria-hidden="true"></i>
+                                            <label class="form-control-label" for="{{ form.name.id }}">{% trans 'Search by name' %}</label>
+                                        </div>
+                                        {% render_field form.name placeholder="Search by name" class="form-control search-form-input" %}
+                                    </div>
+                                </div>
+                                <div class="search-btn col-xl-2 col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group col-xl-12 col-lg-12 col-md-12 col-xs-12">
+                                        <button id="search_form_btn" type="submit" class="btn btn-block white bg-pink-500 search-form-button">
+                                            <i class="icon md-search" aria-hidden="true"></i>
+                                            {% trans 'Search' %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <div id="filter_form_panel" class="panel">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Filter Result</h3>
+                        <div class="panel-actions panel-actions-keep">
+                            <a class="panel-action icon md-minus" data-toggle="panel-collapse" aria-hidden="true"></a>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form id="filter_result_form" method="get" action="{% url "mzyann_search" %}">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label class="form-control-label" for="{{ filter_form.order_by.id }}">Sort by</label>
+                                </div>
+                                {% render_field filter_form.order_by class="form-control" %}
+                            </div>
+                            {% render_field filter_form.price_from %}
+                            {% render_field filter_form.price_to %}
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label class="form-control-label" for="price_filter">Fees range</label>
+                                </div>
+                                <input id="price_filter" type="text">
+                            </div>
+                            <div class="form-group">
+                                <button id="filter_result_btn" type="button" class="btn btn-block pull-xs-right white bg-pink-500 waves-effect js-get-values">
+                                    OK
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if object_list %}
+                <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                    {% for profile in object_list %}
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                            <div class="card card-shadow card-block">
+                                <div class="media media-sm">
+                                    <div class="media-left">
+                                        {% if request.user.is_authenticated %}
+                                            <a class="avatar avatar-lg bg-grey-300 w-50 h-50" href="{% url "professionals_profile" slug=profile.0.slug %}">
+                                                <img class="lazy-loader" data-src="{% cloudinary_url profile.0.profile_picture.public_id height=512 width=512 format='jpeg' crop='fill' %}" alt="{{ profile.0.user.first_name }} {{ profile.0.user.last_name }}">
+                                            </a>
+                                        {% else %}
+                                            <a class="avatar avatar-lg bg-grey-300 w-50 h-50" data-target="#goToLogin" data-toggle="modal" href="#">
+                                                <img class="lazy-loader" data-src="{% cloudinary_url profile.0.profile_picture.public_id height=512 width=512 format='jpeg' crop='fill' %}" alt="{{ profile.0.user.first_name }} {{ profile.0.user.last_name }}">
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="media-body">
+                                        <h4 class="media-heading">
+                                            {{ profile.0.user.first_name }} {{ profile.0.user.last_name }}
+                                            <small>
+                                                <i class="icon md-circle font-size-10"></i> 
+                                                {{ profile.0.job }}
+                                            </small>
+                                        </h4>
+                                        <div class="rating rating-sm" data-half="true" data-read-only="true" data-score="{{ profile.0.ratings.get.average }}" data-star-half="icon md-star-half yellow-600 font-size-16" data-star-off="icon md-star-outline yellow-700 font-size-16" data-star-on="icon md-star yellow-700 font-size-16" data-plugin="rating" style="cursor: pointer;"></div>
+                                        <p>
+                                            {% blocktrans with item=profile.1.item price=profile.1.price %}
+                                                Do <span class="font-size-16 green-700">{{ item }}</span> for <span class="font-size-16 green-700">{{ price }} E.L.</span>
+                                            {% endblocktrans %}
+                                        </p>
+                                        <h5>{% trans 'Work Sample' %}</h5>
+                                        <div class="carousel slide" id="album-{{ profile.0.pk }}" data-ride="carousel">
+                                            <ol class="carousel-indicators carousel-indicators-fall">
+                                                {% for image in profile.0.user.user_album.album_images.all|slice:"3" %}
+                                                    <li class="{% if forloop.counter0 == 0 %}active{% endif %}" data-slide-to="{{ forloop.counter0 }}" data-target="#album-{{ profile.0.pk }}"></li>
+                                                {% endfor %}
+                                            </ol>
+                                            <div class="carousel-inner" role="listbox">
+                                                {% for image in profile.0.user.user_album.album_images.all|slice:"3" %}
+                                                    <div class="carousel-item {% if forloop.counter0 == 0 %}active{% endif %}">
+                                                        <div class="bg-grey-300 h-xl-200 h-lg-200 h-md-350 h-sm-250 h-xs-200">
+                                                            <img class="lazy-loader img-fluid w-full h-xl-200 h-lg-200 h-md-350 h-sm-250 h-xs-200" data-src="{% cloudinary_url image.image.public_id format='jpeg' crop='fill' height=512 width=512 %}" alt="{{ image.image.id }}">
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                            <a class="left carousel-control" href="#album-{{ profile.0.pk }}" role="button" data-slide="prev">
+                                                <span class="icon md-chevron-left" aria-hidden="true"></span>
+                                                <span class="sr-only">{% trans 'Previous' %}</span>
+                                            </a>
+                                            <a class="right carousel-control" href="#album-{{ profile.0.pk }}" role="button" data-slide="next">
+                                                <span class="icon md-chevron-right" aria-hidden="true"></span>
+                                                <span class="sr-only">{% trans 'Next' %}</span>
+                                            </a>
+                                        </div>
+                                        <div class="profile-social pull-xs-left">
+                                            {% if profile.0.user.user_social_websites.facebook %}
+                                                <a href="{{profile.0.user.user_social_websites.facebook}}" target="_blank">
+                                                    <i class="icon bd-facebook font-size-20 facebook-color m-t-20 m-r-5"></i>
+                                                </a>
+                                            {% endif %}
+                                            {% if profile.0.user.user_social_websites.instagram %}
+                                                <a href="{{profile.0.user.user_social_websites.instagram}}" target="_blank">
+                                                    <i class="icon bd-instagram font-size-20 instagram-color m-t-20 m-r-5"></i>
+                                                </a>
+                                            {% endif %}
+                                            {% if profile.0.user.user_social_websites.twitter %}
+                                                <a href="{{profile.0.user.user_social_websites.twitter}}" target="_blank">
+                                                    <i class="icon bd-twitter font-size-20 twitter-color m-t-20 m-r-5"></i>
+                                                </a>
+                                            {% endif %}
+                                            {% if profile.0.user.user_social_websites.youtube %}
+                                                <a href="{{profile.0.user.user_social_websites.youtube}}" target="_blank">
+                                                    <i class="icon bd-youtube font-size-20 youtube-color m-t-20"></i>
+                                                </a>
+                                            {% endif %}
+                                        </div>
+                                        {% if request.user.is_authenticated %}
+                                            <a class="btn btn-primary white waves-effect pull-xs-right m-t-10" href="{% url "professionals_profile" slug=profile.0.slug %}" role="button">{% trans 'More' %}</a>
+                                        {% else %}
+                                            <button class="btn btn-primary white waves-effect pull-xs-right m-t-10" data-target="#goToLogin" data-toggle="modal" type="button">{% trans 'More' %}</button>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% if not is_paginated %}
+                        <ul class="pagination offset-xl-5 offset-lg-5 offset-md-5 offset-sm-4 offset-xs-3">
+                            <li class="pagination-prev page-item {% if not page_obj.has_previous %}disabled{% endif %}">    
+                                <a class="page-link" href="{% if page_obj.has_previous %}{% url "mzyann_search" %}?page={{ page_obj.previous_page_number }}{% endif %}" aria-label="Prev">
+                                    <span class="icon md-chevron-left"></span>
+                                </a>
+                            </li>
+                            <li class="page-item page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</li>                                                                
+                            <li class="pagination-next page-item {% if not page_obj.has_next %}disabled{% endif %}">
+                                <a class="page-link" href="{% if page_obj.has_next %}{% url "mzyann_search" %}?page={{ page_obj.next_page_number }}{% endif %}" aria-label="Next">
+                                    <span class="icon md-chevron-right"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="text-xs-center">
+                    <i class="icon md-alert-circle-o empty" aria-hidden="true"></i>
+                    <p class="font-size-60">{% trans 'No Result' %}</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'vendor/ionrangeslider/ion.rangeSlider.min.js' %}"></script>
+<script src="{% static 'vendor/raty/jquery.raty.min.js' %}"></script>
+<script src="{% static 'js/Plugin/ionrangeslider.min.js' %}"></script>
+<script src="{% static 'js/Plugin/raty.min.js' %}"></script>
+<script src="{% static 'js/Plugin/panel.min.js' %}"></script>
+<script src="{% static 'js/Pages/search-result.min.js' %}"></script>
+{% endblock %}
+

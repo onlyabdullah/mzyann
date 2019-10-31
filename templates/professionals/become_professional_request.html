@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}{% trans 'Become Professional - Request' %}{% endblock %}
+
+{% block stylesheets %}
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'vendor/jquery-wizard/jquery-wizard.min.css' %}">
+  {{ wizard.form.media }}
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+<!-- Page -->
+<div class="page vertical-align text-xs-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle">
+      <div class="panel w-xl-500">
+        <div class="panel-body">
+            <h3 class="font-size-20">Become Professional Request</h3>
+            <h4>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</h4>
+            <form id="becomeProfessionalForm" method="post" action="{% url 'professionals_become_professional_request' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ wizard.management_form }}
+                {% if wizard.steps.current == '0' %}
+                    <div id="profileInfo">
+                        {% if wizard.form.non_field_errors %}
+                            <div class="summary-errors alert alert-danger alert-dismissible text-xs-left" style="display: block;">
+                                <button type="button" class="close" aria-label="Close" data-dismiss="alert">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <p class="">{% trans 'Errors list below: ' %}</p>
+                                <ul>
+                                    {% for error in wizard.form.non_field_errors %}
+                                        <li class="">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <div class="form-group form-material floating text-xs-center" data-plugin="formMaterial">
+                            <input type="text" class="form-control hidden-xs-up" readonly="">
+                            {% render_field wizard.form.profile_picture class="form-control img-input hidden-xs-up" %}
+                            <a class="select w-100 h-100 vertical-align text-xs-center" href="javascript:void(0)">
+                                <div class="panel panel-transparent vertical-align-middle">
+                                    <div class="preview-panel panel-body profile-pic w-100 h-100">
+                                        <i class="icon md-edit white font-size-40" aria-hidden="true" style="display: none;"></i>
+                                    </div>
+                                </div>
+                            </a>
+                            <small class="profile-picture-help text-help">
+                                upload profile picture
+                                {{ wizard.form.profile_picture.help_text }}
+                            </small>
+                            {% for error in wizard.form.profile_picture.errors %}
+                                <small class="text-help red-500">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            {% render_field wizard.form.job class="form-control" %}
+                            <label class="floating-label" for="{{ wizard.form.job.id }}">{% trans 'Job' %}</label>
+                            <small class="text-help">
+                                {{ wizard.form.job.help_text }}
+                            </small>
+                                {% for error in wizard.form.job.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            {% render_field wizard.form.area class="form-control" %}
+                            <label class="floating-label" for="{{ form.area.id }}">{% trans 'Area' %}</label>
+                            <small class="text-help">
+                                {{ wizard.form.area.help_text }}
+                            </small>
+                            {% for error in wizard.form.area.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            {% render_field wizard.form.phone_number class="form-control" %}
+                            <label class="floating-label" for="{{ form.phone_number.id }}">{% trans 'Phone Number' %}</label>
+                            <small class="text-help">
+                                {{ wizard.form.phone_number.help_text }}
+                            </small>
+                            {% for error in wizard.form.phone_number.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            {% render_field wizard.form.about class="form-control" %}
+                            <label class="floating-label" for="{{ form.about.id }}">{% trans 'Briefly, write about yourself' %}</label>
+                            <small class="text-help">
+                                {{ wizard.form.about.help_text }}
+                            </small>
+                            {% for error in wizard.form.about.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% elif wizard.steps.current == '1' %}
+                    <div id="portfolioForm">
+                        <div class="fluid-container row">
+                            <h4 class="text-xs-center green-600">You Should submit 5 images</h4>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group form-material floating" data-plugin="formMaterial">
+                                    {% render_field wizard.form.image_0 class="img-input hidden-xs-up" %}
+                                    <a class="select" href="javascript:void(0)">
+                                        <div class="panel panel-transparent">
+                                            <div class="preview-panel panel-body text-xs-center text-middle w-100 h-100">
+                                                <i class="icon md-plus green-500 font-size-40" aria-hidden="true"></i>
+                                                <i class="icon md-edit green-500 font-size-40" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <small class="text-help">
+                                        {{ wizard.form.image_0.help_text }}
+                                    </small>
+                                    {% for error in wizard.form.image_0.errors %}
+                                    <small class="text-help red-500">
+                                        {{ error }}
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group form-material floating" data-plugin="formMaterial">
+                                    {% render_field wizard.form.image_1 class="img-input hidden-xs-up" %}
+                                    <a class="select" href="javascript:void(0)">
+                                        <div class="panel panel-transparent">
+                                            <div class="preview-panel panel-body text-xs-center text-middle w-100 h-100">
+                                                <i class="icon md-plus green-500 font-size-40" aria-hidden="true"></i>
+                                                <i class="icon md-edit green-500 font-size-40" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <small class="text-help">
+                                        {{ wizard.form.image_1.help_text }}
+                                    </small>
+                                    {% for error in wizard.form.image_1.errors %}
+                                    <small class="text-help red-500">
+                                        {{ error }}
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group form-material floating" data-plugin="formMaterial">
+                                    {% render_field wizard.form.image_2 class="img-input hidden-xs-up" %}
+                                    <a class="select" href="javascript:void(0)">
+                                        <div class="panel panel-transparent">
+                                            <div class="preview-panel panel-body text-xs-center text-middle w-100 h-100">
+                                                <i class="icon md-plus green-500 font-size-40" aria-hidden="true"></i>
+                                                <i class="icon md-edit green-500 font-size-40" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                    </a>                            
+                                    <small class="text-help">
+                                        {{ wizard.form.image_2.help_text }}
+                                    </small>
+                                    {% for error in wizard.form.image_2.errors %}
+                                    <small class="text-help red-500">
+                                        {{ error }}
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group form-material floating" data-plugin="formMaterial">
+                                    {% render_field wizard.form.image_3 class="img-input hidden-xs-up" %}
+                                    <a class="select" href="javascript:void(0)">
+                                        <div class="panel panel-transparent">
+                                            <div class="preview-panel panel-body text-xs-center text-middle w-100 h-100">
+                                                <i class="icon md-plus green-500 font-size-40" aria-hidden="true"></i>
+                                                <i class="icon md-edit green-500 font-size-40" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <small class="text-help">
+                                        {{ wizard.form.image_3.help_text }}
+                                    </small>
+                                    {% for error in wizard.form.image_3.errors %}
+                                    <small class="text-help red-500">
+                                        {{ error }}
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                <div class="form-group form-material floating" data-plugin="formMaterial">
+                                    {% render_field wizard.form.image_4 class="img-input hidden-xs-up" %}
+                                    <a class="select" href="javascript:void(0)">
+                                        <div class="panel panel-transparent">
+                                            <div class="preview-panel panel-body text-xs-center text-middle w-100 h-100">
+                                                <i class="icon md-plus green-500 font-size-40" aria-hidden="true"></i>
+                                                <i class="icon md-edit green-500 font-size-40" aria-hidden="true" style="display: none;"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <small class="text-help">
+                                        {{ wizard.form.image_4.help_text }}
+                                    </small>
+                                    {% for error in wizard.form.image_4.errors %}
+                                    <small class="text-help red-500">
+                                        {{ error }}
+                                    </small>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% elif wizard.steps.current == '2' %}
+                    <div id="socialWebsites">
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon bd-facebook font-size-30 facebook-color" aria-hidden="true"></i>
+                                </span>
+                                <div class="form-control-wrap">
+                                    {% render_field wizard.form.facebook class="form-control" %}
+                                    <label class="floating-label" for="{{ wizard.form.facebook.id }}">{% trans 'Facebook Link (optional)' %}</label>
+                                </div>
+                            </div>
+                            <small class="text-help">
+                                {{ wizard.form.facebook.help_text }}
+                            </small>
+                            {% for error in wizard.form.facebook.errors %}
+                                <small class="text-help red-500">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon bd-instagram font-size-30 instagram-color"></i>
+                                </span>
+                                <div class="form-control-wrap">
+                                    {% render_field wizard.form.instagram class="form-control" %}
+                                    <label class="floating-label" for="{{ wizard.form.instagram.id }}">{% trans 'Instagram Link (optional)' %}</label>
+                                </div>
+                            </div>
+                            <small class="text-help">
+                                {{ wizard.form.instagram.help_text }}
+                            </small>
+                            {% for error in wizard.form.instagram.errors %}
+                            <small class="text-help red-500">
+                                {{ error }}
+                            </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon bd-twitter font-size-30 twitter-color"></i>
+                                </span>
+                                <div class="form-control-wrap">
+                                    {% render_field wizard.form.twitter class="form-control" %}
+                                    <label class="floating-label" for="{{ fwizard.orm.twitter.id }}">{% trans 'Twitter Link (optional)' %}</label>
+                                </div>
+                            </div>
+                            <small class="text-help">
+                                {{ wizard.form.twitter.help_text }}
+                            </small>
+                            {% for error in wizard.form.twitter.errors %}
+                                <small class="text-help red-500">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="icon bd-youtube font-size-30 youtube-color"></i>
+                                </span>
+                                <div class="form-control-wrap">
+                                    {% render_field wizard.form.youtube class="form-control" %}
+                                    <label class="floating-label" for="{{ wizard.form.youtube.id }}">{% trans 'Youtube Link (optional)' %}</label>
+                                </div>
+                            </div>
+                            <small class="text-help">
+                                {{ wizard.form.youtube.help_text }}
+                            </small>
+                            {% for error in wizard.form.youtube.errors %}
+                                <small class="text-help red-500">
+                                    {{ error }}
+                                </small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if wizard.steps.prev %}
+                    <button name="wizard_goto_step" type="submit" class="btn btn-default btn-outline pull-xs-left waves-effect {% if not wizard.steps.prev %}disabled{% endif %}" value="{{ wizard.steps.prev }}">{% trans "Back" %}</button>
+                {% endif %}
+                <button class="btn btn-primary btn-outline pull-xs-right waves-effect white next-btn" type="submit">{% if wizard.steps.next %}{% trans "Next" %}{% else %}{% trans "Finish" %}{% endif %}</button>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- End Page -->
+{% endblock %}
+
+{% block footer %}{% endblock %}
+
+{% block scripts %}
+  <!-- Page -->
+  <script>
+    $(document).ready(function() {
+        $('body').addClass("layout-full");
+    });
+    $('.next-btn').on('click', function() {
+        if (!$('.img-input').val()) {
+            $('.profile-picture-help').append('IS REQUIRED');
+            $('.profile-picture-help').addClass('red-500');
+        }
+    });
+  </script>
+  <script src="{% static 'vendor/select2/select2.full.min.js' %}"></script>
+  <script src="{% static 'vendor/uploadPreview/uploadPreview.min.js' %}"></script>
+  <script src="{% static 'vendor/formvalidation/formValidation.min.js' %}"></script>
+  <script src="{% static 'vendor/formvalidation/framework/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/uploads.min.js' %}"></script>
+  <script src="{% static 'js/Plugin/material.min.js' %}"></script>
+{% endblock %}

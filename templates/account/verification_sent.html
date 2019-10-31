@@ -1,0 +1,25 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Verify Your E-mail Address" %}{% endblock %}
+
+{% block content %}
+<div class="page vertical-align text-xs-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle">
+        <div class="card card-shadow w-xl-500 w-lg-500 w-md-500 w-sm-400 w-xs-350">
+            <div class="card-block">
+                <a class="brand" href="{% url "mzyann_home_page" %}">
+                    <img class="brand-img" src="{% static 'images/logo/mzyann-logo-512x512.png' %}" alt="MZYANN">
+                    <h2 class="brand-text green-600">MZYANN</h2>
+                </a>
+                <h3>{% trans "Verify Your E-mail Address" %}</h3>
+
+                <p>{% blocktrans %}We have sent an e-mail to you for verification. Follow the link provided to finalize the signup process. Please contact us if you do not receive it within a few minutes.{% endblocktrans %}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

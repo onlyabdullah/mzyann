@@ -1,0 +1,117 @@
+.home-page {
+  height: 100%;
+}
+
+.home-page .page-brand-info {
+  margin: 220px 100px 0 90px;
+}
+
+.home-page .page-brand-info .brand-img {
+  width: 175px;
+  height: 100px;
+  vertical-align: middle;
+}
+
+.home-page .page-brand-info .brand-text {
+  display: inline-block;
+  margin: 11px 0 11px 20px;
+  vertical-align: middle;
+}
+
+.home-page .page-brand-info p {
+  max-width: 650px;
+  opacity: .6;
+}
+
+.home-page .home-page-main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: auto;
+  min-height: 100%;
+  padding: 0px 60px 180px;
+  color: #757575;
+  background: #fff;
+}
+
+.home-page .home-page-main .brand {
+  margin-bottom: 100px;
+}
+
+.home-page .home-page-main .brand-img {
+  vertical-align: middle;
+}
+
+.home-page .home-page-main .brand-text {
+  display: inline-block;
+  margin: 11px 0 11px 20px;
+  color: #3f51b5;
+  vertical-align: middle;
+}
+
+#search-form > button {
+  margin-top: 10px;
+}
+
+.home-page footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.home-page .social .icon, .home-page .social .icon:hover, .home-page .social .icon:active {
+  color: #fff;
+}
+
+@media (min-width: 992px) {
+  .home-page .page-content {
+    padding-right: 500px;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-page .home-page-main {
+    padding-top: 0px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .home-page .home-page-main {
+    padding-top: 0px;
+  }
+  .home-page .page-brand-info {
+    margin: 160px 0 0 35px;
+  }
+  .home-page .page-brand-info > p {
+    color: transparent;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-page .home-page-main {
+    width: 100%;
+    padding-top: 0px;
+  }
+  .home-page form {
+    width: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .home-page .page-brand-info {
+    margin: 220px 0 0;
+  }
+  .home-page .home-page-main {
+    padding: 0px 30px 180px;
+  }
+  .home-page form {
+    width: auto;
+  }
+  .home-page footer {
+    margin: 50px 30px;
+  }
+}

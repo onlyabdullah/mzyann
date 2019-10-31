@@ -1,0 +1,168 @@
+{% load static %}
+{% load accounts_tags %}
+{% load i18n %}
+{% load cloudinary %}
+
+<!DOCTYPE html>
+<html class="no-js css-menubar" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+        {% block meta %}
+            <meta name="description" content="Mzyann is an app ro find Makeup Artists, Photographers, Wedding Planners, Event Planners, Veil Designers and other professionals in Egypt.">
+        {% endblock %}
+        <meta name="keywords" content="makeup artist, photographer, veil designer, wedding planner, wedding planner in Egypt, makeup artist in Egypt, photographer in Egypt, veil designer in Egypt, looking for makeup artists, looking for photographers, looking for veil designers, looking for wedding planners">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="shortcut icon" href="{% static '/images/logo/favicon.ico' %}">
+        <link rel="icon" href="{% static '/images/logo/favicon.ico' %}">
+        <!-- Stylesheets -->
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-extend.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/site.min.css' %}">
+        <link rel="stylesheet" href="{% static 'skins/green.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.min.css' %}">
+        <!-- Plugins -->
+        <link rel="stylesheet" href="{% static 'vendor/animsition/animsition.min.css' %}">
+        <link rel="stylesheet" href="{% static 'vendor/waves/waves.min.css' %}">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="{% static 'fonts/material-design/material-design.min.css' %}">
+        <link rel="stylesheet" href="{% static 'fonts/brand-icons/brand-icons.min.css' %}">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,300italic'>
+        <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+        {% block stylesheets %}
+        {% endblock %}
+        <!--[if lt IE 9]>
+            <script src="../../assets/vendor/html5shiv/html5shiv.min.js"></script>
+        <![endif]-->
+        <!--[if lt IE 10]>
+            <script src="../../assets/vendor/media-match/media.match.min.js"></script>
+            <script src="../../assets/vendor/respond/respond.min.js"></script>
+        <![endif]-->
+        <!-- Scripts -->
+        <script src="{% static 'vendor/breakpoints/breakpoints.js' %}"></script>
+        <script>
+            Breakpoints();
+        </script>
+    </head>
+    <body class="animsition site-navbar-small">
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        {% block navbar %}
+            <nav class="site-navbar navbar navbar-default navbar-fixed-top navbar-mega" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggler collapsed" data-target="#site-navbar-collapse"
+                    data-toggle="collapse">
+                        <i class="icon md-menu green-600" aria-hidden="true"></i>
+                    </button>
+                    <a class="navbar-brand navbar-brand-center" href="{% url "mzyann_home_page" %}">
+                        <img class="navbar-brand-logo navbar-brand-logo-special" src="{% static 'images/logo/mzyann-logo-square.png' %}" title="MZYANN">
+                        <span class="navbar-brand-text green-700 hidden-sm-down">MZYANN</span>
+                    </a>
+                </div>
+                <div class="navbar-container container-fluid">
+                    <!-- Navbar Collapse -->
+                    <div class="navbar-collapse collapse" id="site-navbar-collapse">
+                        <!-- Navbar Toolbar Right -->
+                        {% if request.user.is_authenticated %}
+                            <ul class="nav navbar-toolbar navbar-right navbar-toolbar-right">
+                                {% if request.user|has_group:'professional' %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link navbar-avatar" data-toggle="dropdown" href="#" aria-expanded="false"
+                                        data-animation="scale-up" role="button">
+                                            <span class="avatar bg-grey-300">
+                                                <img data-src='{% cloudinary_url request.user.user_profile.profile_picture.public_id height=128 width=128 format="jpeg" crop="fill" %}' class="lazy-loader">
+                                            </span>
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <a class="dropdown-item" href="{% url 'professionals_profile' slug=request.user.user_profile.slug %}" role="menuitem"><i class="icon md-account" aria-hidden="true"></i> {% trans 'Profile' %}</a>
+                                            <a class="dropdown-item" href="{% url 'professionals_update_object' model_name='profile' pk=request.user.user_profile.pk %}" role="menuitem"><i class="icon md-settings" aria-hidden="true"></i> {% trans 'Account Settings' %}</a>                                        
+                                            <div class="dropdown-divider"></div>
+                                            <form class="dropdown-item" method="post" action="{% url "account_logout" %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-block btn-primary text-xs-left">
+                                                    <i class="icon md-power" aria-hidden="true"></i> {% trans 'Logout' %}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                                            {{ request.user.first_name }} {{ request.user.last_name }}
+                                        </a>
+                                        <div class="dropdown-menu" role="menu">
+                                            <a class="dropdown-item" href="{% url 'professionals_become_professional_request' %}" role="menuitem">
+                                                <i class="icon md-account" aria-hidden="true"></i> {% trans 'Become Professional' %}
+                                            </a>
+                                            <div class="dropdown-divider"></div>
+                                            <form class="dropdown-item" method="post" action="{% url "account_logout" %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-block btn-primary text-xs-left">
+                                                    <i class="icon md-power" aria-hidden="true"></i> {% trans 'Logout' %}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        {% else %}
+                            <a class="btn bg-pink-500 white navbar-right navbar-btn waves-effect" href="{% url "account_login" %}">{% trans 'Sign in' %}</a>
+                        {% endif %}
+                        <!-- End Navbar Toolbar Right -->
+                    </div>
+                    <!-- End Navbar Collapse -->
+                </div>
+            </nav>
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+        {% block footer %}
+            <!-- Footer -->
+            <footer class="site-footer">
+                <div class="site-footer-right">
+                    <a class="white" href="{% url 'privacy_policy' %}">Privacy & Policy</a>
+                </div>
+                <div class="site-footer-legal white">© 2018 <a class="white" href="{% url 'mzyann_home_page' %}">Mzyann</a></div>
+            </footer>
+            <!-- End Footer -->
+        {% endblock %}
+        <!-- Core  -->
+        <script src="{% static 'vendor/babel-external-helpers/babel-external-helpers.min.js' %}"></script>
+        <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script src="{% static 'vendor/tether/tether.min.js' %}"></script>
+        <script src="{% static 'vendor/bootstrap/bootstrap.min.js' %}"></script>
+        <script src="{% static 'vendor/animsition/animsition.min.js' %}"></script>
+        <script src="{% static 'vendor/waves/waves.min.js' %}"></script>
+        <!-- Scripts -->
+        <script src="{% static 'js/State.min.js' %}"></script>
+        <script src="{% static 'js/Component.min.js' %}"></script>
+        <script src="{% static 'js/Plugin.min.js' %}"></script>
+        <script src="{% static 'js/Base.min.js' %}"></script>
+        <script src="{% static 'js/Config.min.js' %}"></script>
+        <script src="{% static 'js/Section/Menubar.min.js' %}"></script>
+        <script src="{% static 'js/Section/Sidebar.min.js' %}"></script>
+        <script src="{% static 'js/Section/PageAside.min.js' %}"></script>
+        <script src="{% static 'js/Plugin/menu.min.js' %}"></script>
+        <!-- Config -->
+        <script src="{% static 'js/config/colors.min.js' %}"></script>
+        <script>
+            Config.set('assets', 'assets');
+        </script>
+        <!-- Page -->
+        <script src="{% static 'js/Site.min.js' %}"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.plugins.min.js"></script>
+        {% block scripts %}{% endblock %}
+        <script>
+            (function(document, window, $) {
+                'use strict';
+                var Site = window.Site;
+                $(document).ready(function() {
+                    Site.run();
+                    $('.lazy-loader').Lazy();
+                });
+            })(document, window, jQuery);
+        </script>
+</html>

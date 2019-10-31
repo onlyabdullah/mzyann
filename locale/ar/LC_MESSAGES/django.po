@@ -1,0 +1,823 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR abdullahfathy@hotmai.com, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-08-07 10:30+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Abdullah Fathy abdullahfathy1@hotmail.com\n"
+"Language-Team: Arabic <LL@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: accounts/forms.py:20 accounts/models.py:57 portfolios/models.py:23
+msgid "Male"
+msgstr "ذكر"
+
+#: accounts/forms.py:21 accounts/models.py:58 portfolios/models.py:24
+msgid "Female"
+msgstr "أنثى"
+
+#: accounts/models.py:62
+msgid "Email"
+msgstr "البريد الالكترونى"
+
+#: accounts/models.py:63 templates/account/account_settings.html:38
+#: templates/account/professional_signup.html:75
+#: templates/account/user_signup.html:32
+#: templates/profiles/update_profile.html:66
+msgid "First Name"
+msgstr "الاسم الاول"
+
+#: accounts/models.py:64 templates/account/account_settings.html:52
+#: templates/account/professional_signup.html:89
+#: templates/account/user_signup.html:46
+#: templates/profiles/update_profile.html:80
+msgid "Last Name"
+msgstr "الاسم الاخير"
+
+#: accounts/models.py:65 templates/account/account_settings.html:66
+#: templates/account/professional_signup.html:103
+#: templates/account/user_signup.html:60
+#: templates/profiles/update_profile.html:94
+msgid "Birthday"
+msgstr "تاريخ الميلاد"
+
+#: accounts/models.py:66 templates/account/account_settings.html:78
+#: templates/account/professional_signup.html:115
+#: templates/account/user_signup.html:72
+#: templates/profiles/update_profile.html:106
+msgid "Gender"
+msgstr "النوع"
+
+#: accounts/validators.py:7
+msgid "Name should contain letters only."
+msgstr "الايم يجب ان يحتوى على حروف فقط"
+
+#: mzyann_app/forms.py:17 templates/profiles/profile.html:69
+msgid "Rating"
+msgstr "التقيم"
+
+#: mzyann_app/forms.py:18
+msgid "Price: Low to High"
+msgstr "السعر: من الاقل الى الاعلى"
+
+#: mzyann_app/forms.py:19
+msgid "Price: High to Low"
+msgstr "السعر من الاقل الى الاعلى"
+
+#: portfolios/models.py:22
+msgid "Both"
+msgstr "الكل"
+
+#: profiles/models.py:16
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+#: profiles/models.py:17
+msgid "Accepted"
+msgstr "مقبول"
+
+#: profiles/models.py:18
+msgid "Rejected"
+msgstr "مرفوض"
+
+#: profiles/models.py:22
+msgid "Profile Picture"
+msgstr "الصورة الشخصية"
+
+#: profiles/models.py:24
+msgid "About"
+msgstr "عن"
+
+#: profiles/models.py:26 templates/account/professional_signup.html:200
+#: templates/profiles/update_profile.html:145
+msgid "Phone Number"
+msgstr "رقم الهاتف"
+
+#: profiles/models.py:27
+msgid "Status"
+msgstr "الحالة"
+
+#: profiles/models.py:44 templates/account/professional_signup.html:188
+#: templates/mzyann_app/home_page.html:69
+#: templates/mzyann_app/search_result.html:44
+#: templates/profiles/update_profile.html:133
+msgid "Area"
+msgstr "المنظقة"
+
+#: profiles/models.py:45
+msgid "Area ar"
+msgstr ""
+
+#: profiles/models.py:58 templates/account/professional_signup.html:176
+#: templates/profiles/update_profile.html:121
+msgid "Job"
+msgstr "الوظيفة"
+
+#: profiles/models.py:59
+msgid "Job ar"
+msgstr ""
+
+#: profiles/models.py:71
+msgid "Feature"
+msgstr "المميزات"
+
+#: profiles/models.py:72
+msgid "Feature ar"
+msgstr ""
+
+#: profiles/models.py:125
+msgid "Facebook"
+msgstr "فيسبوك"
+
+#: profiles/models.py:126
+msgid "Twitter"
+msgstr "تويتر"
+
+#: profiles/models.py:127
+msgid "Instagram"
+msgstr "انستاجرام"
+
+#: profiles/models.py:128
+msgid "Youtube"
+msgstr "يوتيوب"
+
+#: templates/account/account_inactive.html:5
+#: templates/account/account_inactive.html:16
+msgid "Account Inactive"
+msgstr "الحساب غير نشط"
+
+#: templates/account/account_inactive.html:18
+msgid "This account is inactive."
+msgstr "هذا الحساب غير نشط"
+
+#: templates/account/account_settings.html:10
+#: templates/account/account_settings.html:16 templates/base.html:91
+#: templates/base.html:108 templates/profiles/update_profile.html:16
+msgid "Account Settings"
+msgstr "اعدادات الحساب"
+
+#: templates/account/account_settings.html:26
+#: templates/account/professional_signup.html:62
+#: templates/account/user_signup.html:20
+#: templates/socialaccount/connections.html:26
+#: templates/socialaccount/snippets/connections.html:13
+msgid "Errors list below: "
+msgstr "قائمة الاخطاء"
+
+#: templates/account/account_settings.html:86
+#: templates/account/account_settings.html:100 templates/account/login.html:45
+#: templates/account/password_reset.html:30
+#: templates/account/professional_signup.html:123
+#: templates/account/user_signup.html:80
+msgid "E-mail Address"
+msgstr "البريد الالكترونى"
+
+#: templates/account/account_settings.html:103
+#, fuzzy, python-format
+#| msgid ""
+#| "To update e-mail address <a href=\"%(account_email)s\">click here</a>"
+msgid ""
+"\n"
+"                    To update e-mail address <a href=\"%(account_email)s"
+"\">click here</a>\n"
+"                "
+msgstr ""
+"لكى تقوم بتعديل البريد الالكترونى <a href=\"%(account_email)s\">اضغط هنا</a>"
+
+#: templates/account/account_settings.html:109 templates/account/email.html:67
+#: templates/account/email.html:69
+#: templates/profiles/create_update_menu_item.html:57
+#: templates/profiles/update_profile.html:179
+#: templates/profiles/update_social_website.html:106
+msgid "Save"
+msgstr "حفظ"
+
+#: templates/account/email.html:7 templates/account/email.html:13
+msgid "Account Settings - E-mail Addresses"
+msgstr "اعدادات الحساب - البريد الالكترونى"
+
+#: templates/account/email.html:16
+msgid "E-mail Addresses"
+msgstr "عناوين البريد الالكتونى"
+
+#: templates/account/email.html:17
+msgid "The following e-mail addresses are associated with your account:"
+msgstr "عناوين البريد الالكترونى التالية مرتبطة مع حسابك"
+
+#: templates/account/email.html:29
+msgid "Verified"
+msgstr "مفعل"
+
+#: templates/account/email.html:31
+msgid "Unverified"
+msgstr "غير مفعل"
+
+#: templates/account/email.html:34
+msgid "Primary"
+msgstr "الرئيسى"
+
+#: templates/account/email.html:42
+msgid "Make Primary"
+msgstr "اجعلة رئيسى"
+
+#: templates/account/email.html:43
+msgid "Re-send Verification"
+msgstr "اعادة ارسال كود التفعيل"
+
+#: templates/account/email.html:44 templates/socialaccount/connections.html:46
+#: templates/socialaccount/snippets/connections.html:33
+msgid "Remove"
+msgstr "مسح"
+
+#: templates/account/email.html:49 templates/account/email.html:63
+msgid "Add E-mail Address"
+msgstr "اضافة عنوان بريد الكترونى"
+
+#: templates/account/email.html:54
+msgid "New E-mail Address"
+msgstr "عنوان بريد الكترونى جديد"
+
+#: templates/account/email.html:82
+msgid "Do you really want to remove the selected e-mail address?"
+msgstr "هل تريد حقا ان تحذف عنوان البريد الاكتروني المختار؟"
+
+#: templates/account/email_confirm.html:6
+#: templates/account/email_confirm.html:10
+msgid "Confirm E-mail Address"
+msgstr "قم بتحقيق عنوان البريد الاكتروني"
+
+#: templates/account/email_confirm.html:16
+#, python-format
+msgid ""
+"Please confirm that <a href=\"mailto:%(email)s\">%(email)s</a> is an e-mail "
+"address for user %(user_display)s."
+msgstr ""
+"يرجى التأكيد ان <a href=\"mailto:%(email)s\">%(email)s</a> من إحدى العنوان "
+"للمستخدم %(user_display)s."
+
+#: templates/account/email_confirm.html:20
+msgid "Confirm"
+msgstr "التأكيد"
+
+#: templates/account/email_confirm.html:27
+#, python-format
+msgid ""
+"This e-mail confirmation link expired or is invalid. Please <a href="
+"\"%(email_url)s\">issue a new e-mail confirmation request</a>."
+msgstr ""
+"هذا الرابط لتأكيد البريد الإلكتروني إنتهت فترة صلاحيته أو إنه غير صالح. يرجى "
+"<a href=\"%(email_url)s\"> إصدار البريد الإلكتروني طلب تأكيد الجديدة </a>."
+
+#: templates/account/login.html:7 templates/account/login.html:75
+#: templates/base.html:65 templates/base.html:122
+#: templates/mzyann_app/search_result.html:181
+msgid "Sign In"
+msgstr "تسجيل الدخول"
+
+#: templates/account/login.html:25
+msgid "Sign into your account"
+msgstr "تسجيل الدخول الى حسابك"
+
+#: templates/account/login.html:33
+#: templates/profiles/update_social_website.html:21
+msgid "Errors list below:"
+msgstr " قائمة الاخطاء"
+
+#: templates/account/login.html:57
+#: templates/account/professional_signup.html:135
+#: templates/account/user_signup.html:92
+msgid "Password"
+msgstr "كلمة المرور"
+
+#: templates/account/login.html:70
+msgid "Remember me"
+msgstr "ذكرنى"
+
+#: templates/account/login.html:72
+msgid "Forgot password?"
+msgstr "نسيت كلمة المرور؟"
+
+#: templates/account/login.html:78
+msgid "Or sign in by"
+msgstr "او قم بالتسجيل عن طريق"
+
+#: templates/account/login.html:86
+#, fuzzy, python-format
+#| msgid ""
+#| "Still no account? Please go to <a href=\"%(account_signup)s\">Sign Up</a>"
+msgid ""
+"\n"
+"      Still no account? Please go to <a href=\"%(account_signup)s\">Sign Up</"
+"a>\n"
+"      "
+msgstr "ليس لديك حساب من فضلك قم <a href=\"%(account_signup)s\">بالتسجيل</a>"
+
+#: templates/account/logout.html:4 templates/account/logout.html:18
+#: templates/base.html:96 templates/base.html:114
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: templates/account/logout.html:17
+msgid "Are you sure you want to Logout?"
+msgstr "هل انت متأكد تريد تسجيل الخروج"
+
+#: templates/account/password_change.html:6
+#: templates/account/password_change.html:11
+#: templates/account/password_change.html:40
+#: templates/account/password_reset_from_key.html:6
+#: templates/account/password_reset_from_key.html:17
+#: templates/account/password_reset_from_key.html:51
+#: templates/account/password_reset_from_key_done.html:5
+#: templates/account/password_reset_from_key_done.html:16
+#: templates/account_settings_base.html:25
+msgid "Change Password"
+msgstr "تغير كلمة المرور"
+
+#: templates/account/password_change.html:18
+msgid "Current Password"
+msgstr "كلمة المرور الحالية"
+
+#: templates/account/password_change.html:26
+#: templates/account/password_reset_from_key.html:28
+#: templates/account/password_set.html:20
+msgid "New Password"
+msgstr "كلمة المرور الجديدة"
+
+#: templates/account/password_change.html:34
+#: templates/account/password_reset_from_key.html:40
+#: templates/account/password_set.html:28
+msgid "New Password (again)"
+msgstr "كلمة المرور الجديدة (مره اخرى)"
+
+#: templates/account/password_reset.html:7
+#: templates/account/password_reset.html:19
+#: templates/account/password_reset_done.html:7
+#: templates/account/password_reset_done.html:18
+msgid "Password Reset"
+msgstr "اعادة ضبط كلمة المرور"
+
+#: templates/account/password_reset.html:24
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+"هل نسيت كلمة المرور؟ أدخل عنوان البريد الإلكتروني أدناه، وسوف نرسل لك عن "
+"طريق البريد الإلكتروني مما يتيح لك إعادة تعيينها."
+
+#: templates/account/password_reset.html:41
+msgid "Reset My Password"
+msgstr "إعادة تعيين كلمة المرور الخاصة بي"
+
+#: templates/account/password_reset.html:44
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+"يرجى الاتصال بنا إذا كان لديك أي مشكلة في إعادة تعيين كلمة المرور الخاصة بك."
+
+#: templates/account/password_reset_done.html:23
+msgid ""
+"We have sent you an e-mail. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+"لقد قمنا بإرسال رسالة اليك عبر البريد الإلكتروني. يرجى الاتصال بنا اذا كنت "
+"لا تتلقى في غضون بضع دقائق."
+
+#: templates/account/password_reset_from_key.html:17
+msgid "Bad Token"
+msgstr ""
+
+#: templates/account/password_reset_from_key.html:21
+#, python-format
+msgid ""
+"The password reset link was invalid, possibly because it has already been "
+"used.  Please request a <a href=\"%(passwd_reset_url)s\">new password reset</"
+"a>."
+msgstr ""
+"كان رابط إعادة تعيين كلمة المرور غير صالحة، ربما لأنه قد تم استخدامه مسبقا. "
+"يرجى طلب <a href=\"%(passwd_reset_url)s\"> كلمة المرور الجديدة</a>."
+
+#: templates/account/password_reset_from_key.html:55
+#: templates/account/password_reset_from_key_done.html:17
+msgid "Your password is now changed."
+msgstr "تم تغيير كلمة المرور الخاصة بك"
+
+#: templates/account/password_set.html:4 templates/account/password_set.html:15
+#: templates/account/password_set.html:35
+msgid "Set Password"
+msgstr "تعيين كلمة مرور"
+
+#: templates/account/professional_signup.html:6
+msgid "Sing up as Professional"
+msgstr "تسجيل الاشتراك كمحترف"
+
+#: templates/account/professional_signup.html:27
+#: templates/account_settings_base.html:38
+msgid "Account"
+msgstr "الحساب"
+
+#: templates/account/professional_signup.html:28
+msgid "Basic Account Info"
+msgstr "معلومات عن الحساب"
+
+#: templates/account/professional_signup.html:34
+#: templates/account_settings_base.html:22 templates/base.html:90
+#: templates/profiles/profile.html:7
+msgid "Profile"
+msgstr "الصفحة الشخصية"
+
+#: templates/account/professional_signup.html:35
+msgid "Profile Info"
+msgstr "معلومات عن الصفحة الشخصية"
+
+#: templates/account/professional_signup.html:41
+#: templates/account_settings_base.html:34 templates/profiles/profile.html:79
+msgid "Portfolio"
+msgstr "ملف الاعمال"
+
+#: templates/account/professional_signup.html:42
+msgid "Add Images for your work"
+msgstr "قم باضافة صور لاعمالك"
+
+#: templates/account/professional_signup.html:48
+msgid "Social Websites"
+msgstr "مواقع التواصل الاجتماعى"
+
+#: templates/account/professional_signup.html:49
+msgid "Facebook, Instagram, Twitter and Youtube"
+msgstr "فيسبوك, انستاجرام, تويتر و يوتيوب"
+
+#: templates/account/professional_signup.html:143
+#: templates/account/user_signup.html:100
+msgid "Password (again)"
+msgstr "كلمه المرور (مرة اخرى)"
+
+#: templates/account/professional_signup.html:223
+#: templates/profiles/update_profile.html:168
+msgid "Briefly, write about yourself"
+msgstr "باختصارو اكتب عن نفسك"
+
+#: templates/account/professional_signup.html:372
+#: templates/profiles/update_social_website.html:36
+msgid "Facebook Link (optional)"
+msgstr "رابط الفيسبوك (اختيارى)"
+
+#: templates/account/professional_signup.html:391
+#: templates/profiles/update_social_website.html:55
+msgid "Instagram Link (optional)"
+msgstr "رابط الانستاجرام (اختيارى)"
+
+#: templates/account/professional_signup.html:410
+#: templates/profiles/update_social_website.html:74
+msgid "Twitter Link (optional)"
+msgstr "رابط تويتر (اختيارى)"
+
+#: templates/account/professional_signup.html:429
+#: templates/profiles/update_social_website.html:93
+msgid "Youtube Link (optional)"
+msgstr "رابط اليوتيوب )اختيارى)"
+
+#: templates/account/professional_signup.html:447
+#, python-format
+msgid ""
+"\n"
+"    Have account already? Please go to <a class=\"blue-200\" href="
+"\"%(account_login)s\">Sign In</a>\n"
+"    "
+msgstr ""
+"\n"
+"    هل تمتلك حساب بالفعل؟ منفضلك اذهب الى <a class=\"blue-200\" href="
+"\"%(account_login)s\">تسجيل الدخول</a>\n"
+"    "
+
+#: templates/account/signup.html:5
+msgid "Sign up"
+msgstr "تسجيل الاشتراك"
+
+#: templates/account/signup.html:35
+msgid "User"
+msgstr "المستخدم"
+
+#: templates/account/signup.html:38
+msgid "Professional"
+msgstr "محترف"
+
+#: templates/account/user_signup.html:7
+msgid "Sign up as User"
+msgstr "تسجيل الاشتراك كمستخدم"
+
+#: templates/account/user_signup.html:12
+msgid "Sign up to find interesting thing"
+msgstr "قم بتسجيل الاشتراك لتكتشف اشياء مثيرة"
+
+#: templates/account/user_signup.html:110
+#: templates/mzyann_app/search_result.html:182
+#: templates/socialaccount/signup.html:5 templates/socialaccount/signup.html:8
+#: templates/socialaccount/signup.html:19
+msgid "Sign Up"
+msgstr "تسجيل الاشتراك"
+
+#: templates/account/user_signup.html:112
+msgid "Or Sign up By"
+msgstr "او قم بتسجيل الاشتراك عن طريق"
+
+#: templates/account/verification_sent.html:5
+#: templates/account/verification_sent.html:16
+#: templates/account/verified_email_required.html:5
+#: templates/account/verified_email_required.html:8
+msgid "Verify Your E-mail Address"
+msgstr "التحقق من عنوان البريد الإلكتروني الخاص بك"
+
+#: templates/account/verification_sent.html:18
+msgid ""
+"We have sent an e-mail to you for verification. Follow the link provided to "
+"finalize the signup process. Please contact us if you do not receive it "
+"within a few minutes."
+msgstr ""
+"لقد أرسلنا رسالة بريد إلكتروني لك للتحقق. اتبع الارتباط المتوفر لإتمام عملية "
+"التسجيل. يرجى الاتصال بنا إذا كنت لا تحصل عليه في غضون دقائق قليلة."
+
+#: templates/account/verified_email_required.html:12
+msgid ""
+"This part of the site requires us to verify that\n"
+"you are who you claim to be. For this purpose, we require that you\n"
+"verify ownership of your e-mail address. "
+msgstr ""
+"هذا الجزء من الموقع يتطلب منك تثبيت هويتك. ولهذا الغرض، نطلب لك التحقق من "
+"ملكيتك لعنوان البريد الإلكتروني الخاص بك."
+
+#: templates/account/verified_email_required.html:16
+msgid ""
+"We have sent an e-mail to you for\n"
+"verification. Please click on the link inside this e-mail. Please\n"
+"contact us if you do not receive it within a few minutes."
+msgstr ""
+"لقد أرسلنا رسالة بريد إلكتروني لك للتحقق. الرجاء النقر فوق الارتباط داخل هذا "
+"البريد الإلكتروني. يرجى الاتصال بنا إذا كنت لا تحصل عليه في غضون دقائق قليلة."
+
+#: templates/account/verified_email_required.html:20
+#, python-format
+msgid ""
+"<strong>Note:</strong> you can still <a href=\"%(email_url)s\">change your e-"
+"mail address</a>."
+msgstr ""
+"<strong>ملاحظة:</strong> مازال يمكنك <a href=\"%(email_url)s\">تغيير عنوان "
+"البريد الإلكتروني الخاص بك</a>."
+
+#: templates/account_settings_base.html:15
+#, fuzzy
+#| msgid "Menu Settings"
+msgid "Settings"
+msgstr "اعدادات القائمة"
+
+#: templates/account_settings_base.html:28
+#: templates/account_settings_base.html:41
+msgid "Social Connections"
+msgstr "الاتصالات الاجتماعية"
+
+#: templates/account_settings_base.html:31 templates/profiles/profile.html:112
+msgid "Menu"
+msgstr "القائمة"
+
+#: templates/mzyann_app/home_page.html:54
+#: templates/mzyann_app/search_result.html:29
+msgid "What you need?"
+msgstr "ماذا تريد؟"
+
+#: templates/mzyann_app/home_page.html:62
+#: templates/mzyann_app/search_result.html:37
+msgid "For?"
+msgstr "لماذا؟"
+
+#: templates/mzyann_app/home_page.html:76
+#: templates/mzyann_app/search_result.html:51
+msgid "Search by name"
+msgstr "ابحث عن طريق الاسم"
+
+#: templates/mzyann_app/home_page.html:85
+#: templates/mzyann_app/search_result.html:60
+msgid "Search"
+msgstr "بحث"
+
+#: templates/mzyann_app/search_result.html:6
+#: templates/mzyann_app/search_result.html:17
+msgid "Search Result"
+msgstr "متائج البحث"
+
+#: templates/mzyann_app/search_result.html:118
+#, python-format
+msgid ""
+"\n"
+"                                                Do <span class=\"font-"
+"size-16 green-700\">%(item)s</span> for <span class=\"font-size-16 "
+"green-700\">%(price)s E.L.</span>\n"
+"                                            "
+msgstr ""
+
+#: templates/mzyann_app/search_result.html:122
+msgid "Work Sample"
+msgstr "بعض الاعمال"
+
+#: templates/mzyann_app/search_result.html:138
+msgid "Previous"
+msgstr "السابق"
+
+#: templates/mzyann_app/search_result.html:142
+msgid "Next"
+msgstr "التالى"
+
+#: templates/mzyann_app/search_result.html:168
+#: templates/mzyann_app/search_result.html:170
+msgid "More"
+msgstr "المزيد"
+
+#: templates/mzyann_app/search_result.html:178
+msgid "Please sign in or sign up to see more about this professional"
+msgstr ""
+"من فضلك قم بتسجيل الدخول او تسجيل الاشتراك لكى ترى المزيد عن هذا المحترف"
+
+#: templates/mzyann_app/search_result.html:212
+msgid "No Result"
+msgstr "لا توجد نتائج"
+
+#: templates/portfolios/update_portfolio.html:6
+msgid "Account Settings - Portfolio"
+msgstr "اعدادات الحساب - ملف الاعمال"
+
+#: templates/portfolios/update_portfolio.html:15
+msgid "Portfolio Settings"
+msgstr "اعدادات ملف الاعمال"
+
+#: templates/portfolios/update_portfolio.html:18
+msgid "Upload photos"
+msgstr "قم برفع صور"
+
+#: templates/portfolios/update_portfolio.html:23
+msgid "Cannot upload more than 20 images"
+msgstr "لا يمكن رفع اكثر من 20 صورة"
+
+#: templates/portfolios/update_portfolio.html:28
+msgid "Uploading"
+msgstr "يتم الرفع الان"
+
+#: templates/portfolios/update_portfolio.html:46
+msgid "Are you sure?"
+msgstr "هل انت متأكد"
+
+#: templates/portfolios/update_portfolio.html:51
+#: templates/portfolios/update_portfolio.html:83
+msgid "Delete"
+msgstr "مسح"
+
+#: templates/portfolios/update_portfolio.html:76
+msgid "Show To"
+msgstr "يراها"
+
+#: templates/portfolios/update_portfolio.html:84
+#: templates/profiles/create_update_menu_item.html:7
+#: templates/profiles/create_update_menu_item.html:20
+msgid "Update"
+msgstr "تحديث"
+
+#: templates/profiles/create_update_menu_item.html:9
+#: templates/profiles/create_update_menu_item.html:22
+msgid "Create"
+msgstr "عمل"
+
+#: templates/profiles/create_update_menu_item.html:11
+#: templates/profiles/create_update_menu_item.html:24
+msgid "Menu Element"
+msgstr "عنصر"
+
+#: templates/profiles/create_update_menu_item.html:35
+msgid "Item Name"
+msgstr "اسم العنصر"
+
+#: templates/profiles/create_update_menu_item.html:48
+#: templates/profiles/update_menu.html:17
+msgid "Price"
+msgstr "السعر"
+
+#: templates/profiles/profile.html:25
+msgid "YOUR PROFILE REQUEST IS REJECTED CHECK YOUR EMAIL FOR MORE INFO"
+msgstr ""
+"لقد تم رفض طلب ملفك الشخصى قم بتفحص بريدك الالكترونى لمزيد من المعلومات"
+
+#: templates/profiles/profile.html:27
+msgid "YOUR PROFILE REQUEST STATUS PENDING"
+msgstr "طلب ملفك الشخصى قيد الانتظار"
+
+#: templates/profiles/profile.html:37
+msgid "Area:"
+msgstr "المنطقة:"
+
+#: templates/profiles/profile.html:40
+msgid "Phone Number:"
+msgstr "رقم الهاتف"
+
+#: templates/profiles/profile.html:119
+msgid "E.L."
+msgstr "جم"
+
+#: templates/profiles/update_menu.html:4
+msgid "Account Settings - Menu"
+msgstr "اعدادات الحساب - القائمة"
+
+#: templates/profiles/update_menu.html:10
+msgid "Menu Settings"
+msgstr "اعدادات القائمة"
+
+#: templates/profiles/update_menu.html:16
+msgid "Name"
+msgstr "الاسم"
+
+#: templates/profiles/update_menu.html:18
+msgid "Actions"
+msgstr "العمليات"
+
+#: templates/profiles/update_menu.html:43
+msgid "Add New Element"
+msgstr "اضافة عنصر جديد"
+
+#: templates/profiles/update_profile.html:11
+msgid "Account Settings - Profile"
+msgstr "اعدادات الحساب - الملف الشخصى"
+
+#: templates/profiles/update_social_website.html:5
+msgid "Account Settings - Social Connections"
+msgstr "اعدادات الحساب - الاتصالات الاجتماعية"
+
+#: templates/profiles/update_social_website.html:11
+msgid "Social Websites Links"
+msgstr "روابط مواقع التواصل الاجتماعى"
+
+#: templates/profiles/update_social_website.html:109
+#: templates/socialaccount/connections.html:6
+#: templates/socialaccount/connections.html:12
+msgid "Account Social Connections"
+msgstr "الاتصالات الاجتماعية بحسابك"
+
+#: templates/socialaccount/authentication_error.html:5
+#: templates/socialaccount/authentication_error.html:13
+msgid "Social Network Login Failure"
+msgstr "فشل تسجيل الدخول الاجتماعي"
+
+#: templates/socialaccount/authentication_error.html:14
+msgid ""
+"An error occurred while attempting to login via your social network account."
+msgstr ""
+"حدث خطأ أثناء محاولة تسجيل الدخول عن طريق حساب الشبكة الاجتماعية الخاصة بك."
+
+#: templates/socialaccount/connections.html:17
+#: templates/socialaccount/snippets/connections.html:4
+msgid ""
+"You can sign in to your account using any of the following third party "
+"accounts:"
+msgstr ""
+
+#: templates/socialaccount/connections.html:52
+#: templates/socialaccount/snippets/connections.html:40
+msgid ""
+"You currently have no social network accounts connected to this account."
+msgstr ""
+"يمكنك تسجيل الدخول إلى الحساب الخاص بك باستخدام أي من حسابات الطرف الثالث "
+"التالية:"
+
+#: templates/socialaccount/connections.html:55
+#: templates/socialaccount/snippets/connections.html:43
+msgid "Add a 3rd Party Account"
+msgstr "إضافة حساب طرف الثالث"
+
+#: templates/socialaccount/login_cancelled.html:5
+#: templates/socialaccount/login_cancelled.html:13
+msgid "Login Cancelled"
+msgstr "الدخول تم إلغاؤه‪.‬"
+
+#: templates/socialaccount/login_cancelled.html:15
+#, python-format
+msgid ""
+"You decided to cancel logging in to our site using one of your existing "
+"accounts. If this was a mistake, please proceed to <a href=\"%(login_url)s"
+"\">Sign In</a>."
+msgstr ""
+"قد قررت إلغاء تسجيل الدخول إلى الموقع باستخدام أحد الحسابات الموجودة الخاصة "
+"بك. إذا كان هذا خطأ، الرجاء المتابعة <a href=\"%(login_url)s\">تسجيل الدخول</"
+"a>."
+
+#: templates/socialaccount/signup.html:10
+#, python-format
+msgid ""
+"You are about to use your %(provider_name)s account to login to\n"
+"%(site_name)s. As a final step, please complete the following form:"
+msgstr ""
+"أنت على وشك استخدام حسابك من %(provider_name)s لتسجيل الدخول إلى "
+"%(site_name)s. وكخطوة أخيرة، يرجى ملء النموذج التالي:"

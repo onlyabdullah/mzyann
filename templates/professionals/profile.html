@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load staticfiles %}
+{% load ratings %}
+{% load i18n %}
+{% load cloudinary %}
+{% load ratings %}
+
+{% block title %}Mzyann | {{ object.user.first_name.title }} {{ object.user.last_name.title }} - {{ object.job }}{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="{{ object.meta_description }}">
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/profile.min.css' %}">
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+{% endblock %}
+
+{% block content %}
+    <!-- Page -->
+    <div class="page">
+        <div class="page-content container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-3 col-md-12 col-ms-12 col-xs-12">
+                    <div class="card card-shadow text-xs-center">
+                        <div class="card-block">
+                            {% if object.status == 'rejected' %}
+                                <p class="red-500"><strong>{% trans 'YOUR PROFILE REQUEST IS REJECTED CHECK YOUR EMAIL FOR MORE INFO' %}</strong></p>
+                            {% elif object.status == 'pending' %}
+                                <p class="orange-500"><strong>{% trans 'YOUR PROFILE REQUEST STATUS PENDING' %}</strong></p>
+                            {% endif %}
+                            <div class="avatar avatar-lg bg-grey-300">
+                                <img data-src='{% cloudinary_url object.profile_picture.public_id height=512 width=512 format="jpeg" crop="fill" %}' class="img-circle lazy-loader" >
+                            </div>
+                            <h4 class="profile-user">{{ object.user.first_name.title }} {{ object.user.last_name.title }}</h4>
+                            <p class="profile-job">{{ object.job }}</p>
+                            <p>{{ object.about }}</p>
+                            <ul class="text-xs-left">
+                                <li>
+                                    <strong>{% trans 'Area:' %} </strong>{{ object.area }}
+                                </li>
+                            </ul>
+                            {% if object.phone_number %}
+                                <div class="modal fade" id="phone-number" aria-hidden="true" aria-labelledby="phone-number" role="dialog" tabindex="-1">
+                                    <div class="modal-dialog modal-center">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-xs-center">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                                <h4 class="modal-title font-size-">{% trans 'Phone Number' %}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p class="font-size-30">{{ object.phone_number }}</p>
+                                                {% if object.call_time_from %}
+                                                    <strong class="yellow-800 bold">You can call {% if object.gender == 'female' %}her{% else %}him{% endif %} from {{ object.call_time_from }} to {{ object.call_time_to }}</strong>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button id="phone-number-modal" href="" class="btn btn-primary">Phone Number</button>
+                            {% endif %}
+                            <div class="profile-social">
+                                {% if object.user.user_social_websites.facebook %}
+                                    <a href="{{object.user.user_social_websites.facebook}}" target="_blank">
+                                        <i class="icon bd-facebook font-size-24 facebook-color"></i>
+                                    </a>
+                                {% endif %}
+                                {% if object.user.user_social_websites.instagram %}
+                                    <a href="{{object.user.user_social_websites.instagram}}" target="_blank">
+                                        <i class="icon bd-instagram font-size-24 instagram-color"></i>
+                                    </a>
+                                {% endif %}
+                                {% if object.user.user_social_websites.twitter %}
+                                    <a href="{{object.user.user_social_websites.twitter}}" target="_blank">
+                                        <i class="icon bd-twitter font-size-24 twitter-color"></i>
+                                    </a>
+                                {% endif %}
+                                {% if object.user.user_social_websites.youtube %}
+                                    <a href="{{object.user.user_social_websites.youtube}}" target="_blank">
+                                        <i class="icon bd-youtube font-size-24 youtube-color"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 col-ms-12 col-xs-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{% trans 'Portfolio' %}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="carousel slide" id="album-{{ album.pk }}" data-ride="carousel">
+                                <ol class="carousel-indicators carousel-indicators-fall">
+                                    {% for image in object.user.user_album.album_images.all %}
+                                        <li class="{% if forloop.counter0 == 0 %}active{% endif %} hidden-xs-up" data-slide-to="{{ forloop.counter0 }}" data-target="#album-{{ album.pk }}"></li>
+                                    {% endfor %}
+                                </ol>
+                                <div class="carousel-inner parent-container" role="listbox">
+                                    {% for image in object.user.user_album.album_images.all %}
+                                        {% if request.user.gender == image.show_to or image.show_to == "both" or object.user == request.user %}
+                                            <div class="carousel-item text-xs-center">
+                                                <figure class="overlay">
+                                                    <div class="bg-grey-300 h-xl-500 h-lg-400 h-md-450 h-sm-350 h-xs-250">
+                                                        <img data-src='{% cloudinary_url image.image.public_id height=512 width=512 format="jpeg" crop="fill" %}' class="lazy-loader overlay-figure img-fluid w-full h-xl-500 h-lg-400 h-md-450 h-sm-350 h-xs-250">
+                                                    </div>
+                                                    <figcaption class="loader-panel overlay-panel overlay-background text-xs-center vertical-align">
+                                                        <div class="loader vertical-align-middle loader-ellipsis"></div>                                
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <a class="left carousel-control" href="#album-{{ album.pk }}" role="button" data-slide="prev">
+                                    <span class="icon md-chevron-left" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="right carousel-control" href="#album-{{ album.pk }}" role="button" data-slide="next">
+                                    <span class="icon md-chevron-right" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-3 col-md-12 col-ms-12 col-xs-12">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{% trans 'Menu' %}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group list-group-full font-size-16">
+                                {% for item in object.user.user_menu.menu_items.all %}
+                                    <li class="list-group-item">
+                                        {{ item.item }}
+                                        <span class="tag tag-pill bg-pink-500">{{ item.price }}{% trans 'E.L.' %}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{% trans 'Rating' %}</h3>
+                        </div>
+                        <div class="panel-body font-size-16">
+                            {% ratings object %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page -->
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'vendor/raty/jquery.raty.min.js' %}"></script>
+    <script src="{% static 'vendor/aspaginator/jquery.asPaginator.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/material.min.js' %}"></script>
+    <script src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/aspaginator.min.js' %}"></script>
+    <script>
+        $(document).ready(function() {
+            $('body').addClass('page-profile');
+            $('.carousel-inner').children().first().addClass('active');
+            $('.lazy-loader').Lazy({
+                afterLoad: function(e) {
+                    $('.loader-panel').addClass('hidden-xs-up');
+                }
+            });
+        });
+        $("#phone-number-modal").on('click', function() {
+            $('#phone-number').modal('show');
+        });
+    </script>
+{% endblock %}

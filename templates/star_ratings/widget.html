@@ -1,0 +1,63 @@
+{% extends "star_ratings/widget_base.html" %}
+{% load i18n %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'fonts/material-design/material-design.min.css' %}">
+
+{% block rating_stars %}
+<div class="star-ratings-rating-stars-container">
+    <ul class="star-ratings-rating-background">
+        {% for star in stars %}
+            <li>
+                {% if editable %}
+                    <form action="{% url 'ratings:rate' rating.content_type_id rating.object_id %}" class="star-ratings-rate-action" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ star }}" name="score">
+                        <input type="hidden" value="{{ request.path }}" name="next">
+                        <button type="submit" class="btn btn-flat btn-icon btn-xs" data-score="{{ star }}">
+                            <i class="icon md-star font-size-24" aria-hidden="true"></i>
+                        </button>
+                    </form>
+                {% elif user.is_authenticated %}
+                    <i class="icon md-star font-size-40" aria-hidden="true"></i>
+                {% else %}
+                    <span class="icon md-star font-size-40" title="{% trans 'Log in to rate' as title_login %}{{ title_login|escape }}"></span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <ul class="star-ratings-rating-foreground" style="width: {{ percentage|floatformat }}%">
+        {% for star in stars %}
+            <li>
+            {% if editable %}
+                <form action="{% url 'ratings:rate' rating.content_type_id rating.object_id %}" class="star-ratings-rate-action" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" value="{{ star }}" name="score">
+                    <input type="hidden" value="{{ request.path }}" name="next">
+                    <button type="submit" class="btn btn-flat btn-icon btn-xs" data-score="{{ star }}">
+                        <i class="icon md-star yellow-600 font-size-24" aria-hidden="true"></i>
+                    </button>
+                </form>
+            {% else %}
+                <i class="icon md-star yellow-600 font-size-40" aria-hidden="true"></i>
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
+{% block rating_detail %}
+    <div class="star-ratings-rating-average">{% trans 'Average: ' %}
+        <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}</span>
+    </div>
+    <div class="star-ratings-rating-user">{% trans 'You Rated: ' %}
+        <span class='star-ratings-rating-value'>
+            {% if user_rating %}
+                {{ user_rating.score }}
+            {% else %}
+                {% trans 'Not rated' %}
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

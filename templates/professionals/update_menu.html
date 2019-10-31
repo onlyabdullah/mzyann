@@ -1,0 +1,55 @@
+{% extends 'account_settings_base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans 'Account Settings - Menu' %}{% endblock %}
+
+
+{% block extra_content %}
+<div class="panel">
+    <div class="panel-heading">
+        <h3 class="panel-title font-size-24">{% trans 'Menu Settings' %}</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table text-xs-center font-size-18">
+            <thead>
+                <tr class="bg-pink-500 white">
+                    <td>{% trans 'Name' %}</td>
+                    <td>{% trans 'Price' %}</td>
+                    <td>{% trans 'Actions' %}</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in menu_items %}
+                    <tr>
+                        <td>{{ item.item }}</td>
+                        <td>{{ item.price }}</td>
+                        <td class="ext-xs-center">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <a class="btn btn-icon btn-flat btn-block btn-default waves-effect" href="{% url "professionals_update_menu_item" pk=item.pk %}" data-original-title="Edit">
+                                    <i class="icon md-wrench" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                            <form class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6" method="post" action="{% url "professionals_delete_menu_item" pk=item.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-block btn-icon btn-flat btn-default waves-effect" data-original-title="Delete">
+                                    <i class="icon md-close" aria-hidden="true"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a class="btn pull-xs-right btn-primary waves-effect" href="{% url "professionals_create_menu_item" %}">{% trans 'Add New Element' %}</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('a').removeClass('active')
+            $('#pricelist').addClass('active')
+        })
+    </script>
+{% endblock %}

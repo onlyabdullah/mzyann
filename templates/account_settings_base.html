@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static  %}
+{% load accounts_tags %}
+{% load i18n %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'vendor/formvalidation/formValidation.css' %}">
+    {% block extra_stylesheets %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    <div class="page">
+        <div class="page-header">
+            <h1 class="page-title">{% trans 'Settings' %}</h1>
+        </div>
+        <div class="page-content container-fluid">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <ul class="nav nav-pills nav-stacked font-size-18">
+                    <li class="nav-item" role="presentation">
+                        <a id='account' class="nav-link active" href="{% url "professionals_update_object" model_name='profile' pk=request.user.user_profile.pk %}">{% trans 'Profile' %}</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id='socialconnections' class="nav-link" href="{% url "professionals_update_object" model_name='socialwebsite' pk=request.user.user_social_websites.pk %}">{% trans 'Social Connections' %}</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id='pricelist' class="nav-link" href="{% url "professionals_update_object" model_name='menu' pk=request.user.user_menu.pk %}">{% trans 'Menu' %}</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a id='portfolio' class="nav-link" href="{% url "portfolios_upload_images" pk=request.user.user_album.pk %}">{% trans 'Portfolio' %}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                {% block extra_content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- Page -->
+    <script src="{% static 'vendor/formvalidation/formValidation.min.js' %}"></script>
+    <script src="{% static 'vendor/formvalidation/framework/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/animate-list.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/material.min.js' %}"></script>
+    {% block extra_scripts %}
+    {% endblock %}
+{% endblock %}

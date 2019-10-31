@@ -1,0 +1,32 @@
+.page-login-v3 .panel {
+  width: 400px;
+  height: 310px;
+  margin-bottom: 45px;
+  background: #fff;
+  border-radius: .286rem;
+}
+
+.page-login-v3 .panel .panel-body {
+  padding: 50px 40px 60px;
+}
+
+.page-login-v3 .panel .brand-text {
+  margin-top: 10px;
+}
+
+.social-login-button {
+  margin-top: 10px;
+}
+
+@media (max-width: 479px) {
+  .page-login-v3 .page-content {
+    padding: 30px 20px;
+  }
+  .page-login-v3 .panel {
+    width: auto;
+    padding: 10px;
+  }
+  .page-login-v3 .panel .panel-body {
+    padding: 10px 25px 35px;
+  }
+}

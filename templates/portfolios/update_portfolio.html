@@ -1,0 +1,117 @@
+{% extends 'account_settings_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load cloudinary %}
+
+{% block title %}{% trans 'Account Settings - Portfolio' %}{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'vendor/notie/notie.min.css' %}">
+{% endblock %}
+
+{% block extra_content %}
+<div class="panel settings-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title font-size-24">{% trans 'Portfolio Settings' %}</h3>
+        <div class="panel-actions">
+            <button type="button" class="btn btn-primary js-upload-photos pull-xs-right">
+                {% trans 'Upload photos' %}
+            </button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <button id="error-alert" type="button" class="btn btn-danger waves-effect hidden-xs-up" name="notie-error" data-plugin="notie" data-type="error" data-text="{% trans 'Cannot upload more than 20 images' %}" data-delay="1.5" data-bgclickdismiss="false">error</button>
+        <div class="modal fade" id="uploadProgressBar" aria-labelledby="uploadProgressBar" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog modal-center">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">{% trans 'Uploading' %}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="progress progress-lg">
+                            <div class="progress-bar progress-bar-primary" style="width: 0%;" role="progressbar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="modal fade" id="delete-alert" aria-hidden="true" aria-labelledby="delete-alert" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-center">
+                <div class="modal-content">
+                    <div class="modal-header text-xs-center">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title font-size-">{% trans 'Are you sure?' %}</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <form class="delete-form" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger waves-effect">{% trans 'Delete' %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <input id="id_image" type="file" name="image" multiple
+                style="display: none;"
+                data-url="{% url "portfolios_upload_images" pk=pk %}"
+                data-form-data='{"csrfmiddlewaretoken": "{{ csrf_token }}"}'>
+
+        <div id="gallery" class="row">
+            <table class="table green-500">
+                <tbody class="images">
+                </tbody>
+            </table>
+            {% for object in images %}
+                <div class="col-xl-4 col-lg-4">
+                    <div class="card">
+                        <div class="bg-grey-300 h-200 h-md-400 h-sm-400">
+                            <img class="lazy-loader card-img-top img-fluid w-full h-200 h-md-400 h-sm-400" data-src="{% cloudinary_url object.image.image.public_id format='jpeg' crop='fill' height=512 width=512 %}">
+                        </div>
+                        <form method="POST" action="{% url "portfolios_image_update" pk=object.image.pk %}">
+                            {% csrf_token %}
+                            <div class="form-group form-material floating" data-plugin="formMaterial">          
+                                {% render_field object.form.show_to class="form-control" placeholder="" %}
+                                <label class="floating-label" for="{{ object.form.show_to.name }}">{% trans 'Show To' %}</label>
+                                <small class="text-help">{{ object.form.show_to.help_text }}</small>
+                                {% for error in object.form.show_to.errors %}
+                                    <small class="text-help red-500">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                            <div class="card-block card-shadow">
+                                <a href="#" class="btn btn-danger waves-effect pull-xs-left delete-img-modal" delete-url="{% url "portfolios_image_delete" pk=object.image.pk %}">{% trans 'Delete' %}</a>
+                                <button type="submit" class="btn btn-primary waves-effect pull-xs-right">{% trans 'Update' %}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(document).ready(function() {
+            $('a').removeClass('active');
+            $('#portfolio').addClass('active');
+            $('.lazy-loader').Lazy();
+        });
+        $(".delete-img-modal").on('click', function() {
+            $('#delete-alert').modal('show');
+            $('.delete-form').attr('action', $(this).attr('delete-url'));
+        });
+    </script>
+    <script src="{% static 'vendor/notie/notie.min.js' %}"></script>
+    <script src="{% static 'vendor/blueimp-file-upload/vendor/jquery.ui.widget.min.js' %}"></script>
+    <script src="{% static 'vendor/blueimp-file-upload/jquery.iframe-transport.min.js' %}"></script>
+    <script src="{% static 'vendor/blueimp-file-upload/jquery.fileupload.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/material.min.js' %}"></script>
+    <script src="{% static 'js/ajax-upload.min.js' %}"></script>
+    <script src="{% static 'js/Plugin/notie-js.min.js' %}"></script>
+{% endblock %}

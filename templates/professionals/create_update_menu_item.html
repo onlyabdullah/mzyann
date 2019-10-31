@@ -1,0 +1,71 @@
+{% extends 'account_settings_base.html' %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {% if object %}
+        {% trans 'Update' %}
+    {% else %}
+        {% trans 'Create' %}
+    {% endif %}
+    {% trans 'Menu Element' %}
+{% endblock %}
+
+
+{% block extra_content %}
+<div class="panel settings-panel">
+    <div class="panel-heading">
+        <h3 class="panel-title font-size-24">
+            {% if object %}
+                {% trans 'Update' %}
+            {% else %}
+                {% trans 'Create' %}
+            {% endif %}
+            {% trans 'Menu Element' %}
+        </h3>
+    </div>
+    <div class="panel-body">
+        <form method="post" class="fv-form fv-form-bootstrap" role="form" autocomplete="off">
+            {% csrf_token %}    
+            <div class="row">            
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    {% if not object %}
+                        <div class="form-group form-material floating" data-plugin="formMaterial">
+                            {% render_field form.item class="form-control" placeholder="" %}
+                            <label class="floating-label" for="{{ form.item.id }}">{% trans 'Item Name' %}</label>
+                            <small class="text-help">{{ form.item.help_text }}</small>
+                            {% for error in form.item.errors %}
+                                <small class="text-help red-500">{{ error }}</small>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p class="font-size-20 m-t-25">{{ object.item }}</p>
+                    {% endif %}                  
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group form-material floating" data-plugin="formMaterial">          
+                        {% render_field form.price class="form-control" placeholder="" %}
+                        <label class="floating-label" for="{{ form.price.id }}">{% trans 'Price' %}</label>
+                        <small class="text-help">{{ form.price.help_text }}</small>
+                        {% for error in form.price.errors %}
+                            <small class="text-help red-500">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="offset-xl-8 offset-lg-8 offset-md-8">
+                <button type="submit" class="btn btn-primary btn-block pull-xs-right waves-effect">{% trans 'Save' %}</button>
+            </div>        
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script>
+        $(document).ready(function() {
+            $('a').removeClass('active');
+            $('#pricelist').addClass('active');
+        })
+    </script>
+{% endblock %}

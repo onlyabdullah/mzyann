@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}Mzyann{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'css/home-page.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Page -->
+<div class="page" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content">
+        <div class="page-brand-info hidden-md-down">
+            <div class="brand w-400">
+                <img class="brand-img" src="{% static 'images/logo/mzyann-logo-white-transparent-square.png' %}" alt="MZYANN">
+                <h2 class="brand-text font-size-40 white">MZYANN</h2>
+            </div>
+            <p class="font-size-20 white">Easy way to find Makeup Artists, Photographers, Wedding Planners and other professionals</p>
+        </div>
+        <div class="home-page-main col-lg-4 col-xl-4 col-md-12">
+            <h3 class="font-size-24">{% trans 'Search for professional' %}</h3>
+            <p>Mzyann, your gate to find professionals.</p>
+            <form id='search-form' method="get" role="form" autocomplete="off" action="{% url 'mzyann_search' %}">
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <div class="inline form-label font-size-16 green-700">
+                        <i class="form-control-icon icon md-help" aria-hidden="true"></i>
+                        <label class="form-control-label" for="{{ form.job.id }}">{% trans 'What you need?' %}</label>
+                    </div>
+                    {% url "mzyann_home_page" as mzyann_home_page %}
+                    {% render_field form.job class="form-control" data-url=mzyann_home_page %}
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <div class="inline form-label font-size-16 green-700">
+                        <i class="form-control-icon icon md-assignment" aria-hidden="true"></i>
+                        <label class="form-control-label" for="{{ form.item.id }}">{% trans 'For?' %}</label>
+                    </div>
+                    {% render_field form.item class="form-control" %}
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <div class="inline form-label font-size-16 green-700">
+                        <i class="icon md-pin" aria-hidden="true"></i>
+                        <label class="form-control-label" for="{{ form.area.id }}">{% trans 'Area' %}</label>
+                    </div>
+                    {% render_field form.area class="form-control" %}
+                </div>
+                <div class="form-group form-material floating" data-plugin="formMaterial">
+                    <div class="inline form-label font-size-16 green-700">
+                        <i class="icon md-face" aria-hidden="true"></i>
+                        <label class="form-control-label" for="{{ form.name.id }}">{% trans 'Search by name (optional)' %}</label>
+                    </div>
+                    {% render_field form.name placeholder="Name" class="form-control" %}
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </form>
+            <footer class="page-copyright">
+                <p>© 2018. All RIGHT RESERVED.</p>
+                <a class="font-size-16" href="{% url 'privacy_policy' %}">Privacy & Policy</a>
+            </footer>
+        </div>
+    </div>
+</div>
+
+{% block footer %}{% endblock %}
+
+<!-- End Page -->
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/Pages/home-page.min.js' %}"></script>
+<script src="{% static 'vendor/formvalidation/formValidation.min.js' %}"></script>
+<script src="{% static 'vendor/formvalidation/framework/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/Plugin/material.js' %}"></script>
+{% endblock %}

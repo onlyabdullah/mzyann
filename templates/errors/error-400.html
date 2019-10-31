@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}400 | Mzyann{% endblock %}
+
+{% block content %}
+  <!-- Page -->
+  <div class="page vertical-align text-xs-center" data-animsition-in="fade-in" data-animsition-out="fade-out">
+    <div class="page-content vertical-align-middle">
+      <header>
+        <h1 class="animation-slide-top">400</h1>
+        <p>Page Not Found !</p>
+      </header>
+      <p class="error-advise">YOU SEEM TO BE TRYING TO FIND HIS WAY HOME</p>
+      <a class="btn btn-primary btn-round" href="{% url "mzyann_home_page" %}">GO TO HOME PAGE</a>
+    </div>
+  </div>
+  <!-- End Page -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function() {
+    $('body').addClass("page-error page-error-400 layout-full");
+  });
+</script>
+{% endblock %}
+  
